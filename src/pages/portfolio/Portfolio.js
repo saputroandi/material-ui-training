@@ -11,9 +11,30 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
-  media: {
+  image: {
     marginTop: '8px',
-    height: `calc(${theme.breakpoints.values.sm}px/2)`,
+    height: `calc(${theme.breakpoints.values.sm}px / 2)`,
+    backgroundImage: 'url("http://material-ui-training.vercel.app/assets/img/IMG_20200509_033424_569.jpg")',
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    position: 'relative',
+  },
+  bgColor:{
+    position: 'absolute',
+    height: `100%`,
+    width: '100%',
+    background: 'linear-gradient(to top, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0))',
+    backgroundSize: 'cover',
+  },
+  profileAttribute:{
+    height: '100%',
+    padding: '6px 16px',
+  },
+  profileTextPrimary:{
+    color: '#d6d6d6',
+  },
+  profileTextSecondary:{
+    color: '#d6d6d6',
   },
   bio: {
     // overflow: 'hidden',
@@ -38,10 +59,24 @@ function Portfolio() {
       <Grid item xs={11}>
         <Grid container spacing={3} justify="center">
           <Grid item xs={12} md={3}>
-            <CardMedia
-              className={classes.media}
-              image="https://images.unsplash.com/photo-1536060316316-2466bda904f1?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
-            />
+            <Paper className={classes.image}>
+              <Paper className={classes.bgColor}>
+                <Grid container justify='flex-start' alignItems='flex-end' className={classes.profileAttribute}>
+                  <Grid item>
+                    <Typography variant='h4' component='h6' className={classes.profileTextPrimary}>
+                      Andi
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      component="p"
+                      className={classes.profileTextSecondary}
+                    >
+                      Lorem ipsum dolor sit amet.
+                    </Typography>
+                  </Grid>
+                </Grid>
+              </Paper>
+            </Paper>
           </Grid>
           <Grid item xs={12} md={3} className={classes.bio}>
             <Paper elevation={1} className={classes.paper}>
