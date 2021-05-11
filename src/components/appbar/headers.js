@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
   appBar: {
     padding: theme.spacing(1),
+    zIndex: `calc(${theme.zIndex.drawer}px + 1px)`,
   },
   menu: {
     display: 'none',
@@ -36,10 +37,11 @@ const useStyles = makeStyles((theme) => ({
   list: {
     padding: theme.spacing(2),
   },
-  toolbar: {
-    height: theme.spacing(10),
+  listItem: {
+    // boxShadow: theme.shadows[1],
   },
   pages: {
+    marginTop: theme.spacing(10),
     width: '100%',
   },
 }));
@@ -47,6 +49,7 @@ const useStyles = makeStyles((theme) => ({
 function Headers({ children }) {
   const classes = useStyles();
   const [drawer, setDrawer] = useState(false);
+  console.log(classes);
   const handleDrawer = () => {
     setDrawer(!drawer);
   };
@@ -56,12 +59,7 @@ function Headers({ children }) {
         <AppBar position="fixed" color="primary" className={classes.appBar}>
           <Toolbar>
             <Grid container justify="space-around">
-              <Grid
-                container
-                justify="space-between"
-                alignItems="center"
-                xs={9}
-              >
+              <Grid container justify="space-between" alignItems="center">
                 <Grid item>
                   <Typography variant="h5">Portfolio</Typography>
                 </Grid>
@@ -85,13 +83,13 @@ function Headers({ children }) {
             className={classes.list}
             onClick={() => setDrawer(false)}
           >
-            <ListItem button>
+            <ListItem button className={classes.listItem}>
               <ListItemIcon>
                 <AccountBoxOutlinedIcon />
               </ListItemIcon>
               <ListItemText primary="Profile" />
             </ListItem>
-            <ListItem button>
+            <ListItem button className={classes.listItem}>
               <ListItemIcon>
                 <ComputerOutlinedIcon />
               </ListItemIcon>
@@ -100,10 +98,7 @@ function Headers({ children }) {
           </List>
         </Drawer>
       </div>
-      <div className={classes.pages}>
-        <div className={classes.toolbar}></div>
-        {children}
-      </div>
+      <div className={classes.pages}>{children}</div>
     </React.Fragment>
   );
 }
