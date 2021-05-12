@@ -18,7 +18,11 @@ import {
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountBoxOutlinedIcon from '@material-ui/icons/AccountBoxOutlined';
-import ComputerOutlinedIcon from '@material-ui/icons/ComputerOutlined';
+import MenuBookOutlinedIcon from '@material-ui/icons/MenuBookOutlined';
+import EmailOutlinedIcon from '@material-ui/icons/EmailOutlined';
+import TimelineOutlinedIcon from '@material-ui/icons/TimelineOutlined';
+import LanguageOutlinedIcon from '@material-ui/icons/LanguageOutlined';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -49,7 +53,6 @@ const useStyles = makeStyles((theme) => ({
 function Headers({ children }) {
   const classes = useStyles();
   const [drawer, setDrawer] = useState(false);
-  console.log(classes);
   const handleDrawer = () => {
     setDrawer(!drawer);
   };
@@ -91,9 +94,27 @@ function Headers({ children }) {
             </ListItem>
             <ListItem button className={classes.listItem}>
               <ListItemIcon>
-                <ComputerOutlinedIcon />
+                <MenuBookOutlinedIcon />
               </ListItemIcon>
-              <ListItemText primary="Capability" />
+              <ListItemText primary="Biograph" />
+            </ListItem>
+            <ListItem button className={classes.listItem}>
+              <ListItemIcon>
+                <TimelineOutlinedIcon />
+              </ListItemIcon>
+              <ListItemText primary="Timeline" />
+            </ListItem>
+            <ListItem button className={classes.listItem}>
+              <ListItemIcon>
+                <LanguageOutlinedIcon />
+              </ListItemIcon>
+              <ListItemText primary="Language" />
+            </ListItem>
+            <ListItem button className={classes.listItem}>
+              <ListItemIcon>
+                <EmailOutlinedIcon />
+              </ListItemIcon>
+              <ListItemText primary="Contact Me" />
             </ListItem>
           </List>
         </Drawer>

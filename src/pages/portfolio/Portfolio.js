@@ -5,7 +5,28 @@ import {
   Paper,
   Typography,
 } from '@material-ui/core';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { GET } from '../../services/services';
+import { Bar } from 'react-chartjs-2';
+
+const rootUrl = process.env.REACT_APP_ROOT_URL;
+const githubUrl = process.env.REACT_APP_API_GITHUB_URL;
+const endPoint = '/users/saputroandi/repos';
+
+const converDataToCartObjectArrays = (arrays) => {
+  let languages = arrays.reduce((total, item) => {
+    const { language } = item;
+    if (!language) {
+      total['Other'] = 1;
+    } else if (!total[language]) {
+      total[language] = 1;
+    } else {
+      total[language] = total[language] + 1;
+    }
+    return total;
+  }, {});
+  return languages;
+};
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -14,26 +35,27 @@ const useStyles = makeStyles((theme) => ({
   image: {
     marginTop: '8px',
     height: `calc(${theme.breakpoints.values.sm}px / 2)`,
-    backgroundImage: 'url("http://material-ui-training.vercel.app/assets/img/IMG_20200509_033424_569.jpg")',
+    backgroundImage: `url(${rootUrl}/assets/img/IMG_20200509_033424_569.jpg)`,
     backgroundPosition: 'center',
     backgroundSize: 'cover',
     position: 'relative',
   },
-  bgColor:{
+  bgColor: {
     position: 'absolute',
     height: `100%`,
     width: '100%',
-    background: 'linear-gradient(to top, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0))',
+    background:
+      'linear-gradient(to top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0))',
     backgroundSize: 'cover',
   },
-  profileAttribute:{
+  profileAttribute: {
     height: '100%',
     padding: '6px 16px',
   },
-  profileTextPrimary:{
+  profileTextPrimary: {
     color: '#d6d6d6',
   },
-  profileTextSecondary:{
+  profileTextSecondary: {
     color: '#d6d6d6',
   },
   bio: {
@@ -50,10 +72,24 @@ const useStyles = makeStyles((theme) => ({
   lastPaper: {
     marginBottom: theme.spacing(2),
   },
+  githubStats: {
+    width: '100%',
+    height: `calc(${theme.breakpoints.values.sm}px/2)`,
+  },
+  contactMe: {
+    width: '100%',
+    height: `calc(${theme.breakpoints.values.sm}px/2)`,
+  },
 }));
 
 function Portfolio() {
   const classes = useStyles();
+  const [data, setData] = useState({});
+  useEffect(() => {
+    GET(githubUrl, endPoint, (res) => {
+      setData(converDataToCartObjectArrays(res.data));
+    });
+  }, []);
   return (
     <Grid container className={classes.root} justify="center">
       <Grid item xs={11}>
@@ -61,9 +97,18 @@ function Portfolio() {
           <Grid item xs={12} md={3}>
             <Paper className={classes.image}>
               <Paper className={classes.bgColor}>
-                <Grid container justify='flex-start' alignItems='flex-end' className={classes.profileAttribute}>
+                <Grid
+                  container
+                  justify="flex-start"
+                  alignItems="flex-end"
+                  className={classes.profileAttribute}
+                >
                   <Grid item>
-                    <Typography variant='h4' component='h6' className={classes.profileTextPrimary}>
+                    <Typography
+                      variant="h4"
+                      component="h6"
+                      className={classes.profileTextPrimary}
+                    >
                       Andi
                     </Typography>
                     <Typography
@@ -164,6 +209,31 @@ function Portfolio() {
                   </Paper>
                 </Grid>
               </Grid>
+            </Paper>
+          </Grid>
+          <Grid item xs={12} md={3}>
+            {/* chart */}
+            <Paper className={classes.githubStats}>
+              <Bar
+                data={{
+                  datasets: [
+                    {
+                      label: 'Top Language',
+                      data: data,
+                      backgroundColor: [
+                        'rgba(174, 62, 176, 0.7)',
+                        'rgba(242, 232, 44, 0.7)',
+                        'rgba(44, 64, 242, 0.7)',
+                        'rgba(237, 28, 28, 0.7)',
+                        'rgba(161, 157, 157, 0.7)',
+                      ],
+                    },
+                  ],
+                }}
+                options={{
+                  maintainAspectRatio: false,
+                }}
+              />
             </Paper>
           </Grid>
         </Grid>
