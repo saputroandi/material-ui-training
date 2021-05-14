@@ -22,7 +22,8 @@ import MenuBookOutlinedIcon from '@material-ui/icons/MenuBookOutlined';
 import EmailOutlinedIcon from '@material-ui/icons/EmailOutlined';
 import TimelineOutlinedIcon from '@material-ui/icons/TimelineOutlined';
 import LanguageOutlinedIcon from '@material-ui/icons/LanguageOutlined';
-
+import Anchor from '../anchor/anchor';
+import { Link } from 'react-scroll';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -64,7 +65,7 @@ function Headers({ children }) {
             <Grid container justify="space-around">
               <Grid container justify="space-between" alignItems="center">
                 <Grid item>
-                  <Typography variant="h5">Portfolio</Typography>
+                  <Typography variant="h5">Andi</Typography>
                 </Grid>
                 <Grid item>
                   <MenuIcon className={classes.menu} onClick={handleDrawer} />
@@ -81,41 +82,72 @@ function Headers({ children }) {
           onEscapeKeyDown={() => setDrawer(false)}
           onBackdropClick={() => setDrawer(false)}
         >
-          <List
-            component="nav"
-            className={classes.list}
-            onClick={() => setDrawer(false)}
-          >
-            <ListItem button className={classes.listItem}>
-              <ListItemIcon>
-                <AccountBoxOutlinedIcon />
-              </ListItemIcon>
-              <ListItemText primary="Profile" />
-            </ListItem>
-            <ListItem button className={classes.listItem}>
-              <ListItemIcon>
-                <MenuBookOutlinedIcon />
-              </ListItemIcon>
-              <ListItemText primary="Biograph" />
-            </ListItem>
-            <ListItem button className={classes.listItem}>
-              <ListItemIcon>
-                <TimelineOutlinedIcon />
-              </ListItemIcon>
-              <ListItemText primary="Timeline" />
-            </ListItem>
-            <ListItem button className={classes.listItem}>
-              <ListItemIcon>
-                <LanguageOutlinedIcon />
-              </ListItemIcon>
-              <ListItemText primary="Language" />
-            </ListItem>
-            <ListItem button className={classes.listItem}>
-              <ListItemIcon>
-                <EmailOutlinedIcon />
-              </ListItemIcon>
-              <ListItemText primary="Contact Me" />
-            </ListItem>
+          <List component="nav" className={classes.list}>
+            <Link
+              to="header"
+              offset={-80}
+              smooth={true}
+              onClick={() => setDrawer(false)}
+            >
+              <ListItem button className={classes.listItem}>
+                <ListItemIcon>
+                  <AccountBoxOutlinedIcon />
+                </ListItemIcon>
+                <ListItemText primary="Profile" />
+              </ListItem>
+            </Link>
+            <Link
+              to="biograph"
+              offset={-80}
+              smooth={true}
+              onClick={() => setDrawer(false)}
+            >
+              <ListItem button className={classes.listItem}>
+                <ListItemIcon>
+                  <MenuBookOutlinedIcon />
+                </ListItemIcon>
+                <ListItemText primary="Biograph" />
+              </ListItem>
+            </Link>
+            <Link
+              to="timeline"
+              offset={-80}
+              smooth={true}
+              onClick={() => setDrawer(false)}
+            >
+              <ListItem button className={classes.listItem}>
+                <ListItemIcon>
+                  <TimelineOutlinedIcon />
+                </ListItemIcon>
+                <ListItemText primary="Timeline" />
+              </ListItem>
+            </Link>
+            <Link
+              to="language"
+              offset={-80}
+              smooth={true}
+              onClick={() => setDrawer(false)}
+            >
+              <ListItem button className={classes.listItem}>
+                <ListItemIcon>
+                  <LanguageOutlinedIcon />
+                </ListItemIcon>
+                <ListItemText primary="Language" />
+              </ListItem>
+            </Link>
+            <Link
+              to="contact"
+              offset={-80}
+              smooth={true}
+              onClick={() => setDrawer(false)}
+            >
+              <ListItem button className={classes.listItem}>
+                <ListItemIcon>
+                  <EmailOutlinedIcon />
+                </ListItemIcon>
+                <ListItemText primary="Contact Me" />
+              </ListItem>
+            </Link>
           </List>
         </Drawer>
       </div>
